@@ -6,7 +6,9 @@ public class CabInvoice {
 	private final static int ratePerKilometer = 10;
 	private final static int ratePerMinute = 1;
 	private final static int minimumFare = 5;
-	private double totalFare,totalKm,totaltime;
+	private static double totalFare;
+	private double totalKm;
+	private double totaltime;
 	
 	public CabInvoice() {}
 	
@@ -25,8 +27,15 @@ public class CabInvoice {
 		return totalFare;
 	}
 	
-	public void calculateFareForMultipleRides(ArrayList<CabInvoice> l1) {
-		l1.stream().forEach(n -> System.out.println(n.calculateFare()));
+	public static double calculateFareForMultipleRides(ArrayList<CabInvoice> l1) {
+		totalFare = 0;
+		l1.stream().forEach(n -> totalFare +=n.calculateFare());
+		return totalFare;
 	}
 	
+	public static double[] enhancedInvoice(ArrayList<CabInvoice> l1) {
+		totalFare = calculateFareForMultipleRides(l1);
+		double arr[] = {(double)l1.size(),totalFare,totalFare/(double)l1.size()};
+		return arr;
+	}
 }

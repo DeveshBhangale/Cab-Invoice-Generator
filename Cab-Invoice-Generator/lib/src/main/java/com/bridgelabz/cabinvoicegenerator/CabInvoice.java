@@ -1,6 +1,7 @@
 package com.bridgelabz.cabinvoicegenerator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CabInvoice {
 	private final static int ratePerKilometer = 10;
@@ -37,5 +38,12 @@ public class CabInvoice {
 		totalFare = calculateFareForMultipleRides(l1);
 		double arr[] = {(double)l1.size(),totalFare,totalFare/(double)l1.size()};
 		return arr;
+	}
+
+	public void getUserInvoice(HashMap<String, ArrayList<CabInvoice>> repository) {
+		repository.forEach((key,value) -> {
+			double arr[] = enhancedInvoice(value);
+			System.out.println(new UserDetails(key,arr[1],arr[2],arr[0]).toString());
+		});
 	}
 }
